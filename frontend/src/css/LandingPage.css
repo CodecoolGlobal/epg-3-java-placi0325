@@ -1,0 +1,22 @@
+.LandingPage {
+  text-align: center;
+}
+
+
+.landingPage{
+  background-color: rgba(255, 255, 255, 0.2);
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: repeat(3, auto);
+  align-content: center;
+  align-self: center;
+  margin-top: 8%;
+  margin-bottom: 10%;
+  margin-left: 35%;
+  margin-right: 35%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  border: 5px rgb(41, 11, 61) double;
+}
+
+

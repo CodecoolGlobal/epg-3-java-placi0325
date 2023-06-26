@@ -1,0 +1,107 @@
+html,body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+}
+
+
+body {
+  font-family:'Raleway', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(115deg, #56d8e4 10%, #9f01ea 90%);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.image {
+  justify-self: center;
+}
+
+.welcometext {
+  justify-self: center;
+  padding-bottom: 20px;
+  font-family:'Raleway', sans-serif;
+}
+
+
+
+.buttonContainer{
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-gap:80px;
+  justify-self: center;
+}
+
+
+/*Landing page buttons: */
+.landingButton {
+  position: relative;
+  align-items: center;
+  background-color: #ffffff;
+  border: 2px solid #111;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #111;
+  cursor: pointer;
+  display: flex;
+  font-family:'Raleway', sans-serif;  font-size: 20px;
+  height: 48px;
+  justify-content: center;
+  max-width: 100%;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+a {
+  text-decoration: none;
+}
+
+.landingButton:after {
+  background-color: #111;
+  border-radius: 8px;
+  content: "";
+  display: block;
+  height: 48px;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  top: -2px;
+  transform: translate(8px, 8px);
+  transition: transform .2s ease-out;
+  z-index: -1;
+}
+
+.landingButton:hover:after {
+  transform: translate(0, 0);
+}
+
+.landingButton:active {
+  background-color: #ffdeda;
+  outline: 0;
+}
+
+.landingButton:hover {
+  outline: 0;
+}
+
+@media (min-width: 768px) {
+  .landingButton {
+    padding: 0 40px;
+  }
+}
+
+
+

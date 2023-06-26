@@ -1,0 +1,80 @@
+.productlistContainer {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 50px;
+}
+
+.listitem {
+  display: grid;
+  place-items: center;
+  background-color: rgb(255, 255, 255, 0.96);
+  border:  2px rgb(165, 51, 99) solid;
+  width: 200px;
+  height: 150px;
+  border-radius: 5%;
+  font-size: large;
+  text-align: center;
+  padding: 10% 10% 10% 10%;
+  transition: 0.1s;
+}
+
+.listitem:hover {
+  border:  3px rgb(214, 75, 133) solid;
+  background-color: #fff;
+  transform: scale(1.05);
+}
+
+.listitem p {
+  font-family:'Raleway', sans-serif;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  background: -webkit-linear-gradient(right, #14bccc, #7501ab, #04c6d8, #460166);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+}
+
+.ProductTable {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 50px;
+}
+
+.addButton {
+  position: relative;
+  align-items: center;
+  background-color: #fee6e3;
+  border: 2px solid #111;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #111;
+  cursor: pointer;
+  display: flex;
+  font-family:'Raleway', sans-serif;  font-size: 20px;
+  height: 48px;
+  justify-content: center;
+  max-width: 100%;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.addButton:hover {
+  background-color: #217dbb;
+}
