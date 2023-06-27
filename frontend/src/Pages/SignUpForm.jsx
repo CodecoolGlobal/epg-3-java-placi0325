@@ -1,16 +1,59 @@
 import { useNavigate } from "react-router-dom";
 import "../css/SignUpForm.css";
 import Footer from "../Components/Footer";
+import {useState} from "react";
+import Loading from "./Loading/Loading";
+
+
+const createNewUser = (user) => {
+  return fetch("/clients", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  });
+};
 
 const SignUpForm = (user) => {
   const navigate = useNavigate();
-  const onSubmit = () => {
-    navigate("/products");
+  const [loading, setLoading] = useState();
+
+  const onSubmit = (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const entries = [...formData.entries()];
+
+      const user = entries.reduce((acc, entry) => {
+          const [k, v] = entry;
+          acc[k] = v;
+          return acc;
+      }, {});
+      handleCreateNewUser(user);
+  };
+
+  const handleCreateNewUser = (user) => {
+    setLoading(true);
+
+    createNewUser(user)
+        .then(() => {
+          navigate("/");
+        })
+        .catch((err) => {
+          throw err;
+        })
+        .finally(() => {
+          setLoading(false);
+        });
   };
 
   const onCancel = () => {
     navigate("/");
   };
+
+  if(loading) {
+    return < Loading />;
+  }
 
   return (
     <div className="formholder">
@@ -20,23 +63,23 @@ const SignUpForm = (user) => {
       </style>
       <form className="signupform" onSubmit={onSubmit}>
         <h1 className="headerForms">Sign up</h1>
-        {user && <input type="hidden" name="_id" defaultValue={user._id} />}
+         <input type="hidden" name="_id" defaultValue={user._id} />
 
         <div className="control">
-          <label htmlFor="name">Username:</label>
+          <label htmlFor="clientName">Username:</label>
           <input
-            defaultValue={user ? user.userName : null}
-            name="name"
-            id="name"
+            name="clientName"
+            id="clientName"
+            type="text"
           />
         </div>
 
         <div className="control">
-          <label htmlFor="level">Password:</label>
+          <label htmlFor="password">Password:</label>
           <input
-            defaultValue={user ? user.passWord : null}
-            name="level"
-            id="level"
+            name="password"
+            id="password"
+            type="password"
           />
         </div>
 
@@ -44,7 +87,8 @@ const SignUpForm = (user) => {
           <button className="button" type="submit">
             Sign up
           </button>
-          <button className="button" type="button" onClick={onCancel}>
+          <button className="button" type="button" onClick={onCancel
+}>
             Cancel
           </button>
         </div>

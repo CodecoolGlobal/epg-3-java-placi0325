@@ -4,11 +4,12 @@ import Footer from "../Components/Footer";
 const LoginForm = (user) => {
   const navigate = useNavigate();
   const onSubmit = () => {
-    navigate("/products");
+    try{navigate("/");}
+    catch{return <h1>Your username or password is incorrect, please try again!</h1>}
   };
 
   const onCancel = () => {
-    navigate("/");
+    navigate("/")
   };
 
   return (
@@ -22,20 +23,19 @@ const LoginForm = (user) => {
       {user && <input type="hidden" name="_id" defaultValue={user._id} />}
 
       <div className="control">
-        <label htmlFor="name">Username:</label>
+        <label htmlFor="clientName">Username:</label>
         <input
-          defaultValue={user ? user.userName : null}
-          name="name"
-          id="name"
+          name="clientName"
+          id="clientName"
         />
       </div>
 
       <div className="control">
-        <label htmlFor="level">Password:</label>
+        <label htmlFor="password">Password:</label>
         <input
-          defaultValue={user ? user.passWord : null}
-          name="level"
-          id="level"
+          name="password"
+          id="password"
+          type={"password" }
         />
       </div>
 

@@ -23,7 +23,7 @@ const NewProductCreator = () => {
 
     createProduct(product)
       .then(() => {
-        navigate("/products");
+        navigate("/");
       })
       .catch((err) => {
         throw err;
@@ -40,7 +40,7 @@ const NewProductCreator = () => {
   return (
     <div>
       <NewProductForm
-        onCancel={() => navigate("/products")}
+        onCancel={() => navigate("/")}
         onSave={handleCreateProduct}
       />
       <Footer />

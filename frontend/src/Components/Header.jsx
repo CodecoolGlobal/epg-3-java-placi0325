@@ -26,6 +26,7 @@ const Header = () => {
           </div>
           <div className='button-containers'>
               <button className='button' onClick={() => navigate("/newproduct")}>Add new product</button>
+              <button className='button' onClick={() => navigate("/landing")}>Login/Sign up</button>
           </div>
         </div>
       </header>

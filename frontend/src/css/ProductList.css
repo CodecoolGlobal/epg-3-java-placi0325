@@ -22,6 +22,7 @@
   border:  3px rgb(214, 75, 133) solid;
   background-color: #fff;
   transform: scale(1.05);
+  cursor: pointer;
 }
 
 .listitem p {
