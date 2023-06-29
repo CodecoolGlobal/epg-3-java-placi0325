@@ -67,10 +67,10 @@ const LoginForm = (user) => {
             <form className="signupform" onSubmit={onSubmit}>
                 <h1 className="headerForms">Log in</h1>
                 <div className="control">
-                    <label htmlFor="username">Username:</label>
+                    <label htmlFor="clientName">Username:</label>
                     <input
-                        name="username"
-                        id="username"
+                        name="clientName"
+                        id="clientName"
                     />
                 </div>
 

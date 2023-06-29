@@ -38,7 +38,7 @@ public class CustomAuthenticationManager implements AuthenticationManager {
         if (userDetails == null || !passwordEncoder.matches(password, userDetails.getPassword())) {
             throw new AuthenticationException("Invalid username or password") {};
         }
-        return new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
+        return new UsernamePasswordAuthenticationToken(username, password, userDetails.getAuthorities());
     }
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

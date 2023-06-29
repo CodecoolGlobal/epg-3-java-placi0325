@@ -8,31 +8,37 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity(debug = true)
 public class SecurityConfig {
-    private PasswordEncoder passwordEncoder;
     private AuthenticationManager authenticationManager;
+
     @Autowired
-    public SecurityConfig(CustomAuthenticationManager authenticationManager,PasswordEncoder passwordEncoder) {
-        this.authenticationManager=authenticationManager;
-        this.passwordEncoder = passwordEncoder;
+    public SecurityConfig(CustomAuthenticationManager authenticationManager) {
+        this.authenticationManager = authenticationManager;
     }
 
-    
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
 
         http.csrf(AbstractHttpConfigurer::disable)
+                .addFilterBefore(new AuthenticationFilter(authenticationManager), BasicAuthenticationFilter.class)
+                .authorizeHttpRequests((auth) -> {
 
-                .authorizeHttpRequests((authz) -> authz
-                        .requestMatchers(HttpMethod.POST,"/products","/frontend/src/Components/NewProductForm.jsx").hasAnyAuthority("USER","ADMIN")
-                        .requestMatchers("/**","/products","/products/** ","/frontend/**","/login").permitAll()
-                        .anyRequest().authenticated()
+                    auth.requestMatchers(HttpMethod.GET, "/products/**","/clients/**").permitAll();
+                    auth.requestMatchers(HttpMethod.POST,"/login","/clients").permitAll();
+                    auth.requestMatchers(HttpMethod.POST,"/products").hasAnyAuthority("USER","ADMIN");
+                    auth.anyRequest().authenticated();
+                        }
                 )
-                .addFilter(new AuthenticationFilter(authenticationManager));
+                .sessionManagement((session) -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                );
 
         return http.build();
     }
