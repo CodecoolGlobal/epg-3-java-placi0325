@@ -26,41 +26,40 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     }
 
     @Override
+    public AuthenticationManager getAuthenticationManager() {
+        return authenticationManager;
+    }
+
+    @Override
     public Authentication attemptAuthentication(HttpServletRequest req,
                                                 HttpServletResponse res) throws AuthenticationException {
 
         try {
-            UsernameAndPasswordAuthenticationRequest authenticationRequest = new ObjectMapper().readValue(
-                    req.getInputStream(), UsernameAndPasswordAuthenticationRequest.class);
+            UsernameAndPasswordAuthenticationRequest authenticationRequest = new ObjectMapper()
+                    .readValue(req.getInputStream(), UsernameAndPasswordAuthenticationRequest.class);
 
+            Authentication authentication = new UsernamePasswordAuthenticationToken(
+                    authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
-            Authentication authentication = new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(),
-                    authenticationRequest.getPassword()
-            );
-
-
-            authenticationManager.authenticate(authentication);
-            if(req.getHeader("Authorization") == null){
-               System.out.println("Auth header: " + req);
-            }
-
+            return authenticationManager.authenticate(authentication);
         } catch (IOException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
-        return super.attemptAuthentication(req,res);
     }
+
     @Override
     protected void successfulAuthentication(HttpServletRequest req,
                                             HttpServletResponse res,
                                             FilterChain chain,
                                             Authentication auth) throws IOException, ServletException {
 
-        String key = "lacinagyoneroskulcsa";
-        String token = Jwts.builder().setSubject(auth.getName()).claim("authorities",auth.getAuthorities())
+        String key = "lacinagyoneroskulcsalacinagyoneroskulcsalacinagyoneroskulcsa";
+        String token = Jwts.builder().setSubject(auth.getName()).claim("authorities", auth.getAuthorities())
                 .setIssuedAt(new Date()).setExpiration(java.sql.Date.valueOf(LocalDate.now().plusWeeks(2)))
                 .signWith(Keys.hmacShaKeyFor(key.getBytes()))
                 .compact();
 
-        res.addHeader("Authorization","Bearer " + token );
+        res.addHeader("Authorization", "Bearer " + token);
     }
 }

@@ -34,7 +34,6 @@ const LoginForm = (user) => {
             userdata[key] = value;
         }
         handleLoginUser(userdata);
-
     };
 
     const onCancel = () => {

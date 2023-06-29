@@ -36,6 +36,7 @@ public class ClientService{
 
 
     public void addNewClient(NewClientDTO client) {
+        System.out.println(client);
         Client newClient = Client.builder()
                 .clientName(client.clientName())
                 .password(passwordEncoder.encode(client.password()))
