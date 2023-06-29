@@ -22,13 +22,11 @@ const SignUpForm = (user) => {
   const onSubmit = (e) => {
       e.preventDefault();
       const formData = new FormData(e.target);
-      const entries = [...formData.entries()];
+      const user = {};
 
-      const user = entries.reduce((acc, entry) => {
-          const [k, v] = entry;
-          acc[k] = v;
-          return acc;
-      }, {});
+      for (let [key, value] of formData.entries()) {
+          user[key] = value;
+      }
       handleCreateNewUser(user);
   };
 

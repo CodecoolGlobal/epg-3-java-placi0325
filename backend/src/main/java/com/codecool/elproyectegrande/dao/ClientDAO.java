@@ -1,4 +1,4 @@
-package com.codecool.elproyectegrande.dao.user;
+package com.codecool.elproyectegrande.dao;
 
 import com.codecool.elproyectegrande.dao.model.Client;
 import com.codecool.elproyectegrande.dao.model.Product;

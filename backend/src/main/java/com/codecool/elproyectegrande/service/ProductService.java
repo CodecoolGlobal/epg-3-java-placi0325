@@ -2,16 +2,15 @@ package com.codecool.elproyectegrande.service;
 
 import com.codecool.elproyectegrande.controller.dto.NewProductDTO;
 import com.codecool.elproyectegrande.dao.model.Product;
-import com.codecool.elproyectegrande.dao.product.ProductDAO;
-import com.codecool.elproyectegrande.dao.user.ClientDAO;
+import com.codecool.elproyectegrande.dao.ProductDAO;
+import com.codecool.elproyectegrande.dao.ClientDAO;
+import com.codecool.elproyectegrande.security.Role;
 import okhttp3.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class ProductService {

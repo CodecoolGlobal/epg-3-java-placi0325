@@ -5,6 +5,7 @@ import com.codecool.elproyectegrande.controller.dto.NewProductDTO;
 import com.codecool.elproyectegrande.dao.model.Product;
 import com.codecool.elproyectegrande.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Role;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +37,7 @@ public class ProductController {
     public Product getProductByID(@PathVariable Long id){
         return productService.getProductById(id);
     }
+
     @PostMapping
     public ResponseEntity addNewProduct(@RequestBody NewProductDTO productDTO) throws IOException {
         productService.addNewProduct(productDTO);
