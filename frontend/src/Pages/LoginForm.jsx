@@ -2,11 +2,14 @@ import {useNavigate} from "react-router-dom";
 import Footer from "../Components/Footer";
 import {useState} from "react";
 import Loading from "./Loading/Loading";
+import { useClient } from "../Context/ClientContext";
 
 
 const LoginForm = (user) => {
     const [loading, setLoading] = useState();
     const navigate = useNavigate();
+
+    const {client, login} = useClient();
 
     const loginUser = (user) => {
         try {
@@ -16,9 +19,19 @@ const LoginForm = (user) => {
 
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(user),
+                body: JSON.stringify(user)
+            })
+            .then(function (res) {
+                const token = res.headers.get("Authorization");
+                localStorage.setItem("Token", token);
+                return token
+                //return res.json()
+            })
+            .then((client) => {
+                login(client)
             });
         } catch {
+            //this is not gonna work ever
             navigate("/")
             console.log("invalid username and/or password")
             return <h1>invalid username and/or password</h1>

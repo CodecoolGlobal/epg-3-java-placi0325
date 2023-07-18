@@ -10,6 +10,7 @@ import SignUpForm from './Pages/SignUpForm';
 import LoginForm from './Pages/LoginForm';
 import ProductPage from './Pages/ProductPage';
 import NewProductCreator from './Pages/NewProductCreator';
+import { ClientContextProvider } from './Context/ClientContext';
 
 
 const router = createBrowserRouter([
@@ -48,7 +49,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ClientContextProvider>
+      <RouterProvider router={router} />
+    </ClientContextProvider>
   </React.StrictMode>
 );
 
