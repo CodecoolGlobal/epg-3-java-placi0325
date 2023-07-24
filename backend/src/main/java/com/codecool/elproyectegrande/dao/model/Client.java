@@ -1,5 +1,6 @@
 package com.codecool.elproyectegrande.dao.model;
 
+import com.codecool.elproyectegrande.security.Role;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -19,6 +20,9 @@ public class Client {
     private Long id;
     private String clientName;
     private String password;
+   // @Enumerated(EnumType.STRING)
+    private String role;
+
     /*@OneToMany( mappedBy = "seller")
     @JsonManagedReference(value="seller-product")
     private List<Product> productsToSell;

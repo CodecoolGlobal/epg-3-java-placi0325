@@ -2,8 +2,10 @@ package com.codecool.elproyectegrande.service;
 
 
 import com.codecool.elproyectegrande.controller.dto.NewClientDTO;
-import com.codecool.elproyectegrande.dao.user.ClientDAO;
+import com.codecool.elproyectegrande.dao.ClientDAO;
+import com.codecool.elproyectegrande.security.Role;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.codecool.elproyectegrande.dao.model.Client;
 
@@ -13,10 +15,12 @@ import java.util.List;
 public class ClientService{
 
     private ClientDAO clientDAO;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public ClientService(ClientDAO clientDAO) {
+    public ClientService(ClientDAO clientDAO, PasswordEncoder passwordEncoder) {
         this.clientDAO = clientDAO;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -32,9 +36,11 @@ public class ClientService{
 
 
     public void addNewClient(NewClientDTO client) {
+        System.out.println(client);
         Client newClient = Client.builder()
                 .clientName(client.clientName())
-                .password(client.password())
+                .password(passwordEncoder.encode(client.password()))
+                .role(Role.USER.toString())
                 .build();
         clientDAO.save(newClient);
     }

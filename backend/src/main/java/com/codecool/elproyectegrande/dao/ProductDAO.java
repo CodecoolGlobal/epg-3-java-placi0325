@@ -1,4 +1,4 @@
-package com.codecool.elproyectegrande.dao.product;
+package com.codecool.elproyectegrande.dao;
 
 import com.codecool.elproyectegrande.dao.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
